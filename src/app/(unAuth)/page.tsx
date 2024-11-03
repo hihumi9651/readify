@@ -1,10 +1,11 @@
 // app/(unAuth)/page.tsx
 "use client"
 
-import { signInWithPopup, GoogleAuthProvider, User } from "firebase/auth";
+import { User } from "firebase/auth";
 import { redirect } from "next/navigation";
 import React, { useEffect } from 'react';
 import { useFirebase } from "@/app/_components/providers/firebase-provider";
+import { SignInButton } from "@/app/_components/auth/SignInButton";
 
 export default function Home() {
   const { auth, isInitialized } = useFirebase();
@@ -71,37 +72,5 @@ export default function Home() {
         </footer>
       </div>
     </main>
-  );
-}
-
-function SignInButton() {
-  const { auth } = useFirebase();
-  
-  const signInWithGoogle = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
-    } catch (error) {
-      console.error('Login error:', error);
-    }
-  }
-
-  return (
-    <button 
-      className="
-      relative
-      px-8 py-3 
-      rounded-xl
-      bg-[#272727]
-      text-gray-300
-      transition-all duration-300
-      shadow-[4px_4px_8px_0px_#1f1f1f,_-4px_-4px_8px_0px_#303030]
-      hover:shadow-[2px_2px_4px_0px_#1f1f1f,_-2px_-2px_4px_0px_#303030]
-      active:shadow-[inset_4px_4px_8px_0px_#1f1f1f,_inset_-4px_-4px_8px_0px_#303030]
-      active:translate-y-0.5
-    "
-      onClick={signInWithGoogle}>
-        Sign in with Google
-    </button>
   );
 }
