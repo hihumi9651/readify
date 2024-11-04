@@ -5,6 +5,8 @@ import { User } from "firebase/auth";
 import { useFirebase } from '@/app/_components/providers/firebase-provider'
 import { redirect } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { Footer } from "@/app/_components/auth/Footer";
+import { Header } from "@/app/_components/auth/Header";
 
 export default function AuthLayout({
   children,
@@ -34,5 +36,11 @@ export default function AuthLayout({
     redirect('/');
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <Header />
+      {children}
+      <Footer />
+    </>
+  )
 }

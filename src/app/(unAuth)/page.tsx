@@ -5,7 +5,7 @@ import { User } from "firebase/auth";
 import { redirect } from "next/navigation";
 import React, { useEffect } from 'react';
 import { useFirebase } from "@/app/_components/providers/firebase-provider";
-import { SignInButton } from "@/app/_components/auth/SignInButton";
+import { SignInButton } from "@/app/_components/unAuth/SignInButton";
 
 export default function Home() {
   const { auth, isInitialized } = useFirebase();
