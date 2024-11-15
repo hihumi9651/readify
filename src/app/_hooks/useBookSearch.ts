@@ -1,4 +1,3 @@
-// _hooks/useBookSearch.ts
 import { useState } from "react";
 import { searchBooks } from "@/app/_lib/api/books";
 import type { Book } from "@/app/_types/books";

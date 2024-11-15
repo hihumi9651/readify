@@ -3,6 +3,7 @@
 
 import { useFirebase } from "@/app/_components/providers/firebase-provider";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { PrismaClient } from "@prisma/client";
 
 interface SignInButtonProps {
   className?: string;
@@ -10,6 +11,18 @@ interface SignInButtonProps {
 
 export function SignInButton({ className = '' }: SignInButtonProps) {
   const { auth } = useFirebase();
+  const prisma = new PrismaClient;
+
+  const registUser = async () => {
+    const user = prisma.user.create({
+      data: {
+        id: "firebase_uid", //            String    @id @map("firebase_uid") // PKとしてのFirebase ID
+        email: "email", 
+        username: "yu-zamei", 
+        lastLoginAt: "", //DateTime? @map("last_login_at")
+      }
+    });
+  }
   
   const signInWithGoogle = async () => {
     if (!auth) {

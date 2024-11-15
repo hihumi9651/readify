@@ -1,4 +1,3 @@
-// app/layout.tsx
 import { FirebaseProvider } from '@/app/_components/providers/firebase-provider'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'

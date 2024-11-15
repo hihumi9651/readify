@@ -1,35 +1,38 @@
 // app/(unAuth)/page.tsx
 "use client"
 
-import { User } from "firebase/auth";
+//import { User } from "firebase/auth";
 import { redirect } from "next/navigation";
-import React, { useEffect } from 'react';
-import { useFirebase } from "@/app/_components/providers/firebase-provider";
+import React from 'react';
+//import { useFirebase } from "@/app/_components/providers/firebase-provider";
 import { SignInButton } from "@/app/_components/unAuth/SignInButton";
+import { useLoginEffect } from "../_hooks/useLoginEffect";
 
 export default function Home() {
-  const { auth, isInitialized } = useFirebase();
-  const [user, setUser] = React.useState<User | null>(null);
-  const [loading, setLoading] = React.useState(true);
+  //const { auth, isInitialized } = useFirebase();
+  //const [user, setUser] = React.useState<User | null>(null);
+  //const [loading, setLoading] = React.useState(true);
 
-  useEffect(() => {
-    if (auth) {
-      const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
-        setUser(user);
-        setLoading(false);
-      });
+  //useEffect(() => {
+  //  if (auth) {
+  //    const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
+  //      setUser(user);
+  //      setLoading(false);
+  //    });
+  //      return () => unsubscribe();
+  //  }
+  //}, [auth]);
 
-      return () => unsubscribe();
-    }
-  }, [auth]);
+ // const {isInitialized, user} = useLoginEffect();
 
-  if (!isInitialized || loading) {
-    return <div>Loading...</div>
-  }
+ // if (!isInitialized || loading) {
+ //   return <div>Loading...</div>
+ // }
 
-  if (user) {
-    redirect("/bookshelf");
-  }
+ // if (user) {
+ //   console.log("test");
+ //   redirect("/bookshelf");
+ // }
 
   return (
     <main className="h-screen w-screen relative bg-black text-white overflow-hidden">
