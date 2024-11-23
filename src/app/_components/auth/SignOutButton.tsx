@@ -1,7 +1,10 @@
+import { useRouter } from "next/navigation";
 import { useFirebase } from "../providers/firebase-provider";
+
 
 export function SignOutButton() {
     const { auth } = useFirebase();
+    const router = useRouter();
   
     const handleSignOut = async () => {
       if (!auth) {
@@ -11,6 +14,7 @@ export function SignOutButton() {
   
       try {
         await auth.signOut();
+        router.push('/')
       } catch (error) {
         console.error('Sign out error:', error);
       }

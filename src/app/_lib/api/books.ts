@@ -1,4 +1,4 @@
-import type { Book, SearchResponse } from '@/app/_types/book';
+import type { Book, SearchResponse } from '@/app/_types/books';
 
 export async function searchBooks(query: string): Promise<Book[]> {
   if (!query.trim()) return [];

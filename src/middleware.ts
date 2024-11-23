@@ -1,46 +1,46 @@
-// middleware.ts
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-//import { auth } from "firebase/auth";  // Firebase Admin SDKを使用
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-// すべてのリクエストの前に実行される
-export async function middleware(request: NextRequest) {
-  // 現在のパス
-  const path = request.nextUrl.pathname
+export function middleware(request: NextRequest) {
 
-  try {
-    // Cookieからセッショントークンを取得
-    const session = request.cookies.get('session')?.value
+  console.log("middleware:start")
 
-    // 認証必要なパス（認証が必要なルートを定義）
-    const authRequired = path.startsWith('/bookshelf')
+  // const token = request.headers.get('Authorization')?.split('Bearer ')[1]; // トークン取得
 
-    // 認証不要なパス（ログイン後にアクセスさせたくないルート）
-    const noAuthRequired = path === '/'
+  // console.log(token)
 
-    if (!session && authRequired) {
-      // 未認証なのに認証必要なパスにアクセス
-      return NextResponse.redirect(new URL('/', request.url))
-    }
+  // if (!token) {
+  //   return NextResponse.redirect(new URL('/', request.url)); // トークンがなければリダイレクト
+  // }
 
-    if (session && noAuthRequired) {
-      // 認証済みなのにログインページにアクセス
-      return NextResponse.redirect(new URL('/bookshelf', request.url))
-    }
-
-    // それ以外は通常通り進める
-    return NextResponse.next()
-  } catch (error) {
-    console.error('Auth error:', error)
-    // エラー時はトップページへ
-    return NextResponse.redirect(new URL('/', request.url))
-  }
+  // APIにリクエストしてトークンを検証
+  // return fetch('/app/_api/auth', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Authorization': `Bearer ${token}`,
+  //   },
+  // })
+  // .then((response) => {
+  //   if (response.ok) {
+  //     console.log("req:ok")
+  //     return NextResponse.next();
+  //   } else {
+  //     console.log("req:ng")
+  //     return NextResponse.redirect(new URL('/bookshelf', request.url)); // 検証失敗時のリダイレクト
+  //   }
+  // })
+  // .catch(() => {
+  //   return NextResponse.redirect(new URL('/', request.url));
+  // });
 }
 
-// ミドルウェアを適用するパスを指定
+// export const config = {
+//   matcher: ['/protected-route'], // 保護したいページに設定
+// };
+
 export const config = {
   matcher: [
-    '/',              // トップページ
-    '/bookshelf', // 本棚関連のパス
+    //'/',
+    '/bookshelf/:path*'
   ]
 }

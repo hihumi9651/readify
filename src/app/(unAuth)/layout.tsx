@@ -1,20 +1,21 @@
-"use client"
+//import { PrismaClient } from "@prisma/client";
+import createAuth from "../actions/auth";
 
-import { redirect } from 'next/navigation'
-import { useAuthRedirect } from "../_hooks/useLoginEffect";
-
-// app/(unAuth)/layout.tsx
 export default function UnAuthLayout({
     children,
   }: {
     children: React.ReactNode
   }) {
 
-    const {user} = useAuthRedirect();
-
-    if(user) {
-      console.log("ログイン後ページにリダイレクトします。")
-      redirect('/bookshelf');
+    interface User_db {
+      id:String
+      email:String
+      username:String
+      //displayName:String | null
+      //createdAt:Date
+      lastLoginAt:Date | null
+      //isDeleted:Boolean
+      //deletedAt:Date
     }
 
     return children;
