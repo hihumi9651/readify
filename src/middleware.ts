@@ -44,3 +44,17 @@ export const config = {
     '/bookshelf/:path*'
   ]
 }
+
+
+//testCode:middleware.ts
+// import { NextResponse } from 'next/server'
+// import type { NextRequest } from 'next/server'
+
+// export async function middleware(request: NextRequest) {
+//   console.log('Middleware triggered:', request.nextUrl.pathname)
+//   return NextResponse.next()
+// }
+
+// export const config = {
+//   matcher: '/:path*'
+// }
