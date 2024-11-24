@@ -3,7 +3,7 @@
 import { useFirebase } from '@/app/_components/providers/firebase-provider';
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { SignOutButton } from "./SignOutButton";
+import { SignOutButton } from "@/app/_components/ui/";
 import { User } from 'firebase/auth';
 import Image from 'next/image';
 
