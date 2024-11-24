@@ -3,7 +3,7 @@
 
 import { useState }  from "react";
 import { useBookSearch } from "@/app/_hooks/useBookSearch";
-import { BookCard } from "./BookCard";
+import { BookCard } from "@/app/_components/ui/BookCard/page";
 
 export function SearchBox() {
   const { books, loading, error, search } = useBookSearch();
