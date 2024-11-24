@@ -1,5 +1,5 @@
 import React from 'react';
-import { SignInButton } from "@/app/_components/unAuth/SignInButton";
+import { SignInButton } from "@/app/_components/ui/SignInButton/page";
 
 
 export default function Home() {
