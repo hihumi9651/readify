@@ -3,7 +3,7 @@
 import { useFirebase } from '@/app/_components/providers/firebase-provider';
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { SignOutButton } from "@/app/_components/ui/";
+import { SignOutButton } from "@/app/_components/ui/SignOutButton/page";
 import { User } from 'firebase/auth';
 import Image from 'next/image';
 
@@ -13,10 +13,22 @@ export function Header() {
     const [user, setUser] = useState<User | null>(null);
 
     useEffect(() => {
-        if(auth){
-            setUser(auth.currentUser);
-        }
-    },[user])
+
+        if (!auth) return;
+
+        //現在のユーザー状態を取得
+        setUser(auth.currentUser);
+
+        //ユーザー状態の変更を監視
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            console.log("Auth state changed:", user?.email);
+            setUser(user);
+        });
+
+        //クリーンアップ関数
+        return () => unsubscribe();
+
+    },[auth])
 
     return (
         <header className="w-full p-6 flex justify-end">

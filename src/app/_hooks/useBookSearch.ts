@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { searchBooks } from "@/app/_lib/api/books";
+import { searchBooks } from "@/app/api/books";
 import type { Book } from "@/app/_types/books";
 
 export function useBookSearch() {

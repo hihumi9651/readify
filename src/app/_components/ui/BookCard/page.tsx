@@ -1,4 +1,3 @@
-// components/books/BookCard.tsx
 import { Book } from "@/app/_types/books";
 
 interface BookCardProps {

@@ -1,10 +1,13 @@
 import type { Book, SearchResponse } from '@/app/_types/books';
 
 export async function searchBooks(query: string): Promise<Book[]> {
+  
   if (!query.trim()) return [];
 
+  const googleBooksApiKey = "AIzaSyD_PYUWXK77a0B-1e-M4TKmcKfLFdQNfwk"
+
   const res = await fetch(
-    `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`
+    `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&key=${googleBooksApiKey}`
   );
 
   if (!res.ok) {
