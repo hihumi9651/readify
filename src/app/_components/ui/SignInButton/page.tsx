@@ -2,7 +2,6 @@
 
 import { useFirebase } from "@/app/_components/providers/firebase-provider";
 import { getRedirectResult, GoogleAuthProvider, signInWithRedirect } from "firebase/auth";
-import { get } from "lodash";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from 'react';
 
@@ -42,11 +41,13 @@ export function SignInButton({ className = '' }: SignInButtonProps) {
       try {
 
         setLoading(true);  // ボタンを無効化
+        console.log("ボタン無効化")
 
         // const userCredential = await getRedirectResult(auth)
         // console.log(userCredential)
         
         const userCredential = await getRedirectResult(auth);
+        console.log("クリデンシャルゲット")
         console.log(currentUser)
         if (!userCredential) return;
         console.log("userCredential atta")
@@ -108,7 +109,7 @@ export function SignInButton({ className = '' }: SignInButtonProps) {
     checkSignInWithGoogle();
     console.log("end")
     
-  },[]);
+  },[auth]);
 
   // const signInWithGoogle2 = async () => {
 
