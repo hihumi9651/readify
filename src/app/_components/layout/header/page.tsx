@@ -3,7 +3,7 @@
 import { useFirebase } from '@/app/_components/providers/firebase-provider';
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { SignOutButton } from "@/app/_components/ui/SignOutButton/page";
+//import { SignOutButton } from "@/app/_components/ui/SignOutButton/page";
 import { User } from 'firebase/auth';
 import Image from 'next/image';
 
@@ -37,7 +37,8 @@ export function Header() {
                 <Link href="/search" className="btn-primary">書籍検索</Link>
                 <p className="btn-primary">タイムライン（coming soon）</p>
                 <p className="btn-primary">マイページ（coming soon）</p>
-                <SignOutButton />
+                ..
+
                 {/* ユーザー情報の表示 */}
                 {user && (
                     <div className="flex items-center gap-4 mb-4">

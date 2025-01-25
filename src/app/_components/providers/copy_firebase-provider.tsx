@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
-import { createContext, useContext, useEffect, useState } from "react";
-import { initializeApp, getApps } from "firebase/app";
-import { getAuth, Auth, User } from "firebase/auth";
+import { createContext, useContext, useEffect, useState } from 'react'
+import { initializeApp, getApps } from 'firebase/app'
+import { getAuth, Auth, User } from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: "AIzaSyA1IdNc39nkzNsL1ZZ806z9UWYZ3hZtd6k",
@@ -26,15 +26,17 @@ const FirebaseContext = createContext<FirebaseContextType>({
   auth: null,
   isInitialized: false,
   currentUser: null,
-  signInCheck: false,
+  signInCheck: false
 });
 
 // Custom Hook for Firebase
 export function useFirebase() {
   const context = useContext(FirebaseContext);
+  
   if (!context) {
-    throw new Error("useFirebase must be used within a FirebaseProvider");
+    throw new Error('useFirebase must be used within a FirebaseProvider');
   }
+  
   return context;
 }
 
@@ -50,15 +52,13 @@ export function FirebaseProvider({ children }: { children: React.ReactNode }) {
       const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
       const authInstance = getAuth(app);
       setAuth(authInstance);
-  
-  +   // authInstance から直接 onAuthStateChanged を呼ぶ
-  +   authInstance.onAuthStateChanged((user) => {
+      authInstance.onAuthStateChanged( (user) => {
         if (user) {
           setCurrentUser(user);
+          setSignInCheck(true);
         } else {
-          setCurrentUser(null);
+          setSignInCheck(true);
         }
-        setSignInCheck(true);
       });
     } catch (error) {
       console.error('Firebase initialization error:', error);

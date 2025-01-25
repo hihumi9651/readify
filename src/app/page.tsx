@@ -1,5 +1,6 @@
 import React from 'react';
 import { SignInButton } from "@/app/_components/ui/SignInButton/page";
+import { Footer } from './_components/layout/footer/page';
 
 
 export default function Home() {
@@ -40,9 +41,7 @@ export default function Home() {
         </div>
 
         {/* フッター */}
-        <footer className="w-full p-6 text-center text-gray-600 text-sm">
-          <p>© 2024 Readify - すべての読書家へ</p>
-        </footer>
+        <Footer />
       </div>
     </main>
   );

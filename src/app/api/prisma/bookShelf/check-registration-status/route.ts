@@ -1,7 +1,8 @@
 import prisma from "@/app/_lib/prisma"
-import { NextResponse } from "next/server"
+import { RegisteredBookStatus } from "@/app/_types/books"
+import { NextRequest, NextResponse } from "next/server"
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
     try {
 
         console.log("ユーザ書籍情報検索を開始")
@@ -9,9 +10,6 @@ export async function GET(request: Request) {
         const { searchParams } = new URL(request.url)
         const isbns = searchParams.get('isbns')?.split(',')
         const userId = searchParams.get('userId')
-
-        console.log(isbns)
-        console.log(userId)
 
         if (!isbns || !userId) {
             return NextResponse.json(
@@ -24,11 +22,16 @@ export async function GET(request: Request) {
             where: {
                 isbn: { in: isbns },
                 userId: userId
+            },
+            select: {
+                isbn: true,
+                status: true
             }
         })
 
         return NextResponse.json({ registeredBooks })
     } catch (error) {
+        console.error('Error fetching bookshelf:', error)
         return NextResponse.json(
             { error: "Failed to get bookshelf" },
             { status: 500 }
